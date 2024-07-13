@@ -38,31 +38,31 @@ Logout and Quit: Users can log out or quit the application, saving all changes m
 
 ## Example Usage
 
-# Login as admin
+**Login as admin**
 Username: admin
 
-# Create a new user
+**Create a new user**
 Admin: Create user -> Username: john
 
-# Login as user
+**Login as user**
 Username: john
 
-# Create a new album
+**Create a new album**
 User: Create album -> Album name: Vacation
 
-# Add a photo to the album
+**Add a photo to the album**
 User: Add photo -> Select photo from file system -> Add tags (optional)
 
-# Search for photos by tag
+**Search for photos by tag**
 User: Search photos -> Tag: location=beach
 
-# View a photo in the album
+**View a photo in the album**
 User: Open album -> Select photo -> View photo details and tags
 
-# Logout
+**Logout**
 User: Logout
 
-# Development Details
+### Development Details
 Packages: The project is organized into packages for the model, view, and controller.
 
 Main Class: Photos with the main method to launch the application.
@@ -70,6 +70,9 @@ Main Class: Photos with the main method to launch the application.
 Data Storage: Uses Java serialization for storing and retrieving photo and album data.
 
 JavaFX: The GUI is designed using JavaFX and FXML.
+
+# Author
+Hasnain Shahzad
 
 # Author
 Hasnain Shahzad

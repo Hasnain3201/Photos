@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<SplitPane dividerPositions="0.5, 0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.view.PhotosController">
+  <items>
+      <MenuBar fx:id="menuBar" prefHeight="28.0" prefWidth="600.0">
+         <menus>
+            <Menu fx:id="file" mnemonicParsing="false" text="File">
+                  <items>
+                     <MenuItem fx:id="logout" onAction="#handleLogoutAction" text="Logout" />
+                  </items>
+            </Menu>
+            <Menu fx:id="album" mnemonicParsing="false" text="Album">
+                  <items>
+                     <MenuItem fx:id="addAlbum" mnemonicParsing="false" onAction="#handleAddAlbumAction" text="Add Album" />
+                     <MenuItem fx:id="renameAlbum" mnemonicParsing="false" onAction="#handleRenameAlbumAction" text="Rename Album" />
+                     <MenuItem fx:id="deleteAlbum" mnemonicParsing="false" onAction="#onDeleteAlbumAction" text="Delete Album" />
+                     <MenuItem fx:id="addPhotoToAlbum" mnemonicParsing="false" onAction="#onAddPhotoToAlbum" text="Add Photo to Album" />
+                     <MenuItem fx:id="removePhotoFromAlbum" mnemonicParsing="false" onAction="#onRemovePhotoFromAlbum" text="Remove Photo from Album" />
+                  </items>
+            </Menu>
+            <Menu fx:id="photo" mnemonicParsing="false" text="Photo">
+                  <items>
+                     <MenuItem fx:id="addCaption" onAction="#handleAddCaptionAction" text="Add/Edit Caption" />
+                     <MenuItem fx:id="copyPhotoMenuItem" onAction="#onCopyPhotoToAnotherAlbum" text="Copy Photo to Another Album" />
+                     <MenuItem fx:id="movePhotoToAlbum" onAction="#onMovePhotoToAnotherAlbum" text="Move Photo to Album" />
+                     <MenuItem fx:id="addTagMenuItem" onAction="#handleAddTagAction" text="Add Tag" />
+                     <MenuItem fx:id="deleteTagMenuItem" onAction="#handleDeleteTagAction" text="Delete Tag" />
+                  </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearch" text="Search by Tag" />
+            <Button fx:id="searchByTagPairs" onAction="#onSearchByTagPairs" text="Search by Tag Pairs" />
+            <Button fx:id="searchByDates" onAction="#onSearchByDates" text="Search by Dates" />
+        </items>
+      </ToolBar>
+      <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ListView fx:id="listView" layoutY="-1.0" prefHeight="316.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ScrollPane fx:id="scrollPane" layoutX="22.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <VBox fx:id="searchResultsContainer" spacing="10"> 
+                           <Button fx:id="compileResultsButton" text="Compile Results into Album" visible="false" />
+                           <TilePane fx:id="tilePane" prefHeight="200.0" prefWidth="200.0" />
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+  </items>
+</SplitPane>

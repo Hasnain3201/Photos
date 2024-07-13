@@ -21,7 +21,8 @@ This project is a single-user photo application that allows storage and manageme
 - Java Development Kit (JDK) installed on your system.
   
 
-##Application Usage
+
+## Application Usage
 
 Login: Users can log in with a username (password is optional).
 

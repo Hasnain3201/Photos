@@ -71,6 +71,5 @@ Data Storage: Uses Java serialization for storing and retrieving photo and album
 
 JavaFX: The GUI is designed using JavaFX and FXML.
 
-** Author** 
-
+**Author** 
 Hasnain Shahzad

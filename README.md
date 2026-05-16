@@ -1,63 +1,70 @@
 # Photos
 
 <p align="center">
-  <strong>A JavaFX desktop application for organizing photos into albums with tags, captions, search, and user management.</strong>
+  <strong>A JavaFX desktop photo library with users, albums, captions, tags, search, and a built-in stock-photo demo account.</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Language-Java-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
+  <img src="https://img.shields.io/badge/Java-17%20%2F%208-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
   <img src="https://img.shields.io/badge/UI-JavaFX-2f74c0?style=for-the-badge" alt="JavaFX">
   <img src="https://img.shields.io/badge/Build-Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven">
-  <img src="https://img.shields.io/badge/Storage-Serialized%20Data-6f42c1?style=for-the-badge" alt="Serialized storage">
+  <img src="https://img.shields.io/badge/Data-Serialized%20Users-6f42c1?style=for-the-badge" alt="Serialized users">
 </p>
 
 ## Preview
 
-Screenshots have not been added yet because this workspace does not have a JavaFX runtime available to launch the desktop UI. After running the app locally, add screenshots to `screenshots/` such as `screenshots/login.png`, `screenshots/admin.png`, and `screenshots/albums.png`.
+<p align="center">
+  <img src="screenshots/photo-library.png" alt="Photo library screen" width="49%">
+  <img src="screenshots/photo-viewer.png" alt="Photo viewer screen" width="49%">
+</p>
+
+<p align="center">
+  <img src="screenshots/login.png" alt="Login screen" width="49%">
+  <img src="screenshots/admin-dashboard.png" alt="Admin dashboard" width="49%">
+</p>
 
 ## Overview
 
-Photos is a desktop photo management app built with JavaFX. It supports multiple users, an admin dashboard, stock photos, albums, captions, tags, tag/date search, and a photo viewer. Data is stored locally using Java serialization, making it easy to demo without a separate database.
+Photos is a desktop photo-management app built with JavaFX and FXML. It supports an admin workflow, user libraries, album management, imported photos, captions, tag-value metadata, date/tag search, and a viewer for browsing selected photos. Data is stored locally with Java serialization, so the app can be demonstrated without a separate database.
 
-The project source lives in the original course-project folder structure under `Photos03-main/Photos03`, with a root-level Maven build file added for simpler setup.
+The original project structure is preserved under `Photos03-main/Photos03`, with a root Maven file added for a clearer modern run path.
 
-## Key Features
+## Highlights
 
-- Login flow for regular users plus an admin user.
-- Admin dashboard for creating, listing, and deleting users.
+- Admin login for creating, listing, and deleting users.
+- User login with a bundled `stock` account.
 - Album creation, deletion, and renaming.
-- Photo import from the local file system.
-- Captions and custom tag-value pairs for photos.
+- Local photo imports through the JavaFX file chooser.
+- Captions and custom tags on photos.
 - Search by tag, multiple tag pairs, or date range.
 - Compile search results into a new album.
-- Photo viewer with image preview, date, and tags.
-- Bundled stock-photo user and sample images.
+- Photo viewer with image, date, caption, and tag details.
 
 ## Tech Stack
 
-| Area | Technology |
+| Layer | Tools |
 | --- | --- |
-| Language | Java 17 |
+| Language | Java |
 | UI | JavaFX, FXML |
 | Build | Maven with OpenJFX dependencies |
-| Storage | Java serialization (`.ser` files) |
-| Assets | Bundled stock photos |
+| Storage | Java serialization (`.ser`) |
+| Assets | Bundled stock images |
 
 ## Project Structure
 
 ```text
 .
 ├── pom.xml
+├── screenshots/
+│   ├── login.png
+│   ├── admin-dashboard.png
+│   ├── photo-library.png
+│   └── photo-viewer.png
 ├── Photos03-main/
 │   ├── data/
-│   │   ├── admin.ser
-│   │   └── stock.ser
 │   └── Photos03/
 │       ├── data/stock/
 │       └── src/photos/
-│           ├── app/
-│           ├── model/
-│           └── view/
 └── README.md
 ```
 
@@ -65,23 +72,16 @@ The project source lives in the original course-project folder structure under `
 
 ### Prerequisites
 
-- JDK 17 or newer
+- JDK 17+
 - Maven 3.8+
-
-### Installation
-
-```bash
-git clone https://github.com/Hasnain3201/Photos.git
-cd Photos
-```
 
 ### Run
 
 ```bash
+git clone https://github.com/Hasnain3201/Photos.git
+cd Photos
 mvn javafx:run
 ```
-
-The Maven build downloads JavaFX controls and FXML dependencies automatically.
 
 ### Build
 
@@ -89,38 +89,30 @@ The Maven build downloads JavaFX controls and FXML dependencies automatically.
 mvn clean package
 ```
 
-## Usage
+## Demo Flow
 
-| Action | How to Demo |
+| Step | Action |
 | --- | --- |
-| Admin login | Enter `admin` on the login screen. |
-| Create user | Log in as `admin`, create a username, then log out. |
-| User login | Enter a created username, or use `stock` to view bundled stock photos. |
-| Create album | Use the Album menu and choose Add Album. |
-| Add photos | Select an album, then use Add Photo to Album. |
-| Tag/search | Add tags to photos, then search by tag, tag pairs, or date range. |
-| View photo | Double-click a photo thumbnail to open the viewer. |
+| Admin | Log in as `admin` and create a user. |
+| Stock Library | Log in as `stock` to view bundled sample photos. |
+| Albums | Create, rename, delete, and select albums from the main view. |
+| Photos | Import images, add captions, and double-click to open the viewer. |
+| Search | Search by date or tag pairs, then compile results into a new album. |
 
 ## Data Notes
 
-- User data is stored in `Photos03-main/data/*.ser`.
+- Serialized user data is stored in `Photos03-main/data/*.ser`.
 - Stock images are stored in `Photos03-main/Photos03/data/stock/`.
-- The app now resolves those paths from the repo root, `Photos03-main`, or `Photos03-main/Photos03`.
+- The app resolves those paths from the repo root, `Photos03-main`, or `Photos03-main/Photos03`.
 
 ## Troubleshooting
 
 | Issue | Fix |
 | --- | --- |
-| JavaFX classes are missing | Run with Maven using `mvn javafx:run` so JavaFX dependencies are provided. |
-| Maven is not installed | Install Maven, then rerun `mvn javafx:run`. |
-| Stock photos do not appear | Confirm the files still exist in `Photos03-main/Photos03/data/stock/`. |
-| Serialized user data becomes stale | Delete or regenerate the affected `.ser` file in `Photos03-main/data/`. |
-
-## Future Improvements
-
-- Add screenshots after launching the JavaFX UI locally.
-- Add unit tests around album, photo, and tag model behavior.
-- Improve visual styling of the FXML screens while keeping the current workflows intact.
+| JavaFX classes are missing | Run with Maven so OpenJFX dependencies are provided. |
+| Maven is not on PATH | Install Maven or run through an IDE with JavaFX configured. |
+| Stock photos are missing | Confirm files exist in `Photos03-main/Photos03/data/stock/`. |
+| Serialized data is stale | Remove the affected `.ser` file and let the app recreate it. |
 
 ## Author
 

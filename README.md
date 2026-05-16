@@ -11,18 +11,6 @@
   <img src="https://img.shields.io/badge/Data-Serialized%20Users-6f42c1?style=for-the-badge" alt="Serialized users">
 </p>
 
-## Preview
-
-<p align="center">
-  <img src="screenshots/photo-library.png" alt="Photo library screen" width="49%">
-  <img src="screenshots/photo-viewer.png" alt="Photo viewer screen" width="49%">
-</p>
-
-<p align="center">
-  <img src="screenshots/login.png" alt="Login screen" width="49%">
-  <img src="screenshots/admin-dashboard.png" alt="Admin dashboard" width="49%">
-</p>
-
 ## Overview
 
 Photos is a desktop photo-management app built with JavaFX and FXML. It supports an admin workflow, user libraries, album management, imported photos, captions, tag-value metadata, date/tag search, and a viewer for browsing selected photos. Data is stored locally with Java serialization, so the app can be demonstrated without a separate database.

@@ -17,7 +17,6 @@ public class Photos extends Application {
 
     private static final String STOCK_USER = "stock";
     private static final String ADMIN_USER = "admin";
-    private static final String STOCK_PHOTO_DIR = "Photos03/data/stock";
     private static Stage primaryStage;
 
     public static String getStockUser() {
@@ -29,7 +28,6 @@ public class Photos extends Application {
         Photos.primaryStage = primaryStage;
         initializeUsers();
         showLoginScreen();
-        System.out.println(new File(STOCK_PHOTO_DIR).getAbsolutePath());
     }
 
 
@@ -95,7 +93,7 @@ public class Photos extends Application {
     }
 
         private static void loadStockPhotos(Album album) {
-            File stockDir = new File(STOCK_PHOTO_DIR);
+            File stockDir = UserDataManager.getStockPhotoDirectory();
             File[] stockPhotos = stockDir.listFiles((dir, name) -> name.toLowerCase().matches(".*\\.(jpg|jpeg|png|gif|bmp)$"));
             if (stockPhotos != null) {
                 for (File photoFile : stockPhotos) {
@@ -115,4 +113,3 @@ public class Photos extends Application {
         launch(args);
     }
 }
-

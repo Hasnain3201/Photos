@@ -1,77 +1,130 @@
-# Photos Application
+# Photos
+
+<p align="center">
+  <strong>A JavaFX desktop application for organizing photos into albums with tags, captions, search, and user management.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-Java-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
+  <img src="https://img.shields.io/badge/UI-JavaFX-2f74c0?style=for-the-badge" alt="JavaFX">
+  <img src="https://img.shields.io/badge/Build-Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven">
+  <img src="https://img.shields.io/badge/Storage-Serialized%20Data-6f42c1?style=for-the-badge" alt="Serialized storage">
+</p>
+
+## Preview
+
+Screenshots have not been added yet because this workspace does not have a JavaFX runtime available to launch the desktop UI. After running the app locally, add screenshots to `screenshots/` such as `screenshots/login.png`, `screenshots/admin.png`, and `screenshots/albums.png`.
 
 ## Overview
 
-This project is a single-user photo application that allows storage and management of photos in one or more albums. The application is built using JavaFX for the user interface and includes features such as tagging, searching, and organizing photos into albums.
+Photos is a desktop photo management app built with JavaFX. It supports multiple users, an admin dashboard, stock photos, albums, captions, tags, tag/date search, and a photo viewer. Data is stored locally using Java serialization, making it easy to demo without a separate database.
 
-## Features
+The project source lives in the original course-project folder structure under `Photos03-main/Photos03`, with a root-level Maven build file added for simpler setup.
 
-- **Photo Management**: Store, organize, and manage photos in multiple albums.
-- **Tagging System**: Tag photos with custom attributes for easy search and organization.
-- **Date Handling**: Use the last modification date of the photo file as the date the photo was taken.
-- **Stock Photos**: Pre-loaded stock photos included in the application.
-- **User Management**: Admin functionality to manage user accounts.
-- **Search Functionality**: Search photos by date range and tag values.
-- **JavaFX Interface**: User interface designed with JavaFX and FXML.
+## Key Features
+
+- Login flow for regular users plus an admin user.
+- Admin dashboard for creating, listing, and deleting users.
+- Album creation, deletion, and renaming.
+- Photo import from the local file system.
+- Captions and custom tag-value pairs for photos.
+- Search by tag, multiple tag pairs, or date range.
+- Compile search results into a new album.
+- Photo viewer with image preview, date, and tags.
+- Bundled stock-photo user and sample images.
+
+## Tech Stack
+
+| Area | Technology |
+| --- | --- |
+| Language | Java 17 |
+| UI | JavaFX, FXML |
+| Build | Maven with OpenJFX dependencies |
+| Storage | Java serialization (`.ser` files) |
+| Assets | Bundled stock photos |
+
+## Project Structure
+
+```text
+.
+├── pom.xml
+├── Photos03-main/
+│   ├── data/
+│   │   ├── admin.ser
+│   │   └── stock.ser
+│   └── Photos03/
+│       ├── data/stock/
+│       └── src/photos/
+│           ├── app/
+│           ├── model/
+│           └── view/
+└── README.md
+```
 
 ## Getting Started
 
 ### Prerequisites
 
-- Java Development Kit (JDK) installed on your system.
-  
+- JDK 17 or newer
+- Maven 3.8+
 
+### Installation
 
-## Application Usage
+```bash
+git clone https://github.com/Hasnain3201/Photos.git
+cd Photos
+```
 
-Login: Users can log in with a username (password is optional).
+### Run
 
-Admin Functions: Admin can create, delete, and list users.
+```bash
+mvn javafx:run
+```
 
-Photo Management: Users can create, delete, and rename albums. They can also add, remove, tag, and search photos within albums.
+The Maven build downloads JavaFX controls and FXML dependencies automatically.
 
-Search Photos: Users can search for photos by date range or by tag-value pairs (e.g., person=susan).
+### Build
 
-Slide Show: Users can view photos in a manual slideshow within an album.
+```bash
+mvn clean package
+```
 
-Logout and Quit: Users can log out or quit the application, saving all changes made during the session.
+## Usage
 
-## Example Usage
+| Action | How to Demo |
+| --- | --- |
+| Admin login | Enter `admin` on the login screen. |
+| Create user | Log in as `admin`, create a username, then log out. |
+| User login | Enter a created username, or use `stock` to view bundled stock photos. |
+| Create album | Use the Album menu and choose Add Album. |
+| Add photos | Select an album, then use Add Photo to Album. |
+| Tag/search | Add tags to photos, then search by tag, tag pairs, or date range. |
+| View photo | Double-click a photo thumbnail to open the viewer. |
 
-**Login as admin**
-Username: admin
+## Data Notes
 
-**Create a new user**
-Admin: Create user -> Username: john
+- User data is stored in `Photos03-main/data/*.ser`.
+- Stock images are stored in `Photos03-main/Photos03/data/stock/`.
+- The app now resolves those paths from the repo root, `Photos03-main`, or `Photos03-main/Photos03`.
 
-**Login as user**
-Username: john
+## Troubleshooting
 
-**Create a new album**
-User: Create album -> Album name: Vacation
+| Issue | Fix |
+| --- | --- |
+| JavaFX classes are missing | Run with Maven using `mvn javafx:run` so JavaFX dependencies are provided. |
+| Maven is not installed | Install Maven, then rerun `mvn javafx:run`. |
+| Stock photos do not appear | Confirm the files still exist in `Photos03-main/Photos03/data/stock/`. |
+| Serialized user data becomes stale | Delete or regenerate the affected `.ser` file in `Photos03-main/data/`. |
 
-**Add a photo to the album**
-User: Add photo -> Select photo from file system -> Add tags (optional)
+## Future Improvements
 
-**Search for photos by tag**
-User: Search photos -> Tag: location=beach
+- Add screenshots after launching the JavaFX UI locally.
+- Add unit tests around album, photo, and tag model behavior.
+- Improve visual styling of the FXML screens while keeping the current workflows intact.
 
-**View a photo in the album**
-User: Open album -> Select photo -> View photo details and tags
+## Author
 
-**Logout**
-User: Logout
+**Hasnain Shahzad**
 
-### Development Details
-Packages: The project is organized into packages for the model, view, and controller.
-
-Main Class: Photos with the main method to launch the application.
-
-Data Storage: Uses Java serialization for storing and retrieving photo and album data.
-
-JavaFX: The GUI is designed using JavaFX and FXML.
-
-
-
-**Author** 
-Hasnain Shahzad
+- GitHub: [Hasnain3201](https://github.com/Hasnain3201)
+- LinkedIn: [hasnain-shahzad-cs3201](https://www.linkedin.com/in/hasnain-shahzad-cs3201/)

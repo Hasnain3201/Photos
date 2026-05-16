@@ -7,15 +7,43 @@ import java.util.List;
 import java.util.Map;
 
 public class UserDataManager {
-    private static final String DATA_FOLDER = "data";
+    private static final String[] DATA_FOLDER_CANDIDATES = {
+        "data",
+        "Photos03-main/data",
+        "../data"
+    };
+    private static final String[] STOCK_PHOTO_DIR_CANDIDATES = {
+        "data/stock",
+        "Photos03/data/stock",
+        "Photos03-main/Photos03/data/stock",
+        "../Photos03/data/stock"
+    };
     private static final String FILE_EXTENSION = ".ser";
 
     static {
-        File dataDir = new File(DATA_FOLDER);
+        File dataDir = getDataFolder();
         if (!dataDir.exists()) {
             dataDir.mkdirs();
         }
         createDefaultUsers();
+    }
+
+    private static File resolveDirectory(String[] candidates) {
+        for (String candidate : candidates) {
+            File directory = new File(candidate);
+            if (directory.exists() && directory.isDirectory()) {
+                return directory;
+            }
+        }
+        return new File(candidates[0]);
+    }
+
+    public static File getDataFolder() {
+        return resolveDirectory(DATA_FOLDER_CANDIDATES);
+    }
+
+    public static File getStockPhotoDirectory() {
+        return resolveDirectory(STOCK_PHOTO_DIR_CANDIDATES);
     }
 
     public static User loadOrCreateUser(String username) throws IOException, ClassNotFoundException {
@@ -50,15 +78,14 @@ public class UserDataManager {
     }
 
     public static void saveUserData(User user) throws IOException {
-        String filename = DATA_FOLDER + File.separator + user.getUsername() + FILE_EXTENSION;
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+        File userFile = new File(getDataFolder(), user.getUsername() + FILE_EXTENSION);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(userFile))) {
             oos.writeObject(user);
         }
     }
 
     public static User loadUserData(String username) throws IOException, ClassNotFoundException {
-        String filename = DATA_FOLDER + File.separator + username + FILE_EXTENSION;
-        File userFile = new File(filename);
+        File userFile = new File(getDataFolder(), username + FILE_EXTENSION);
         if (userFile.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(userFile))) {
                 return (User) ois.readObject();
@@ -69,7 +96,7 @@ public class UserDataManager {
 
     public static Map<String, User> loadAllUsers() throws IOException, ClassNotFoundException {
         Map<String, User> users = new HashMap<>();
-        File dataDir = new File(DATA_FOLDER);
+        File dataDir = getDataFolder();
         File[] userFiles = dataDir.listFiles((dir, name) -> name.endsWith(FILE_EXTENSION));
         if (userFiles != null) {
             for (File file : userFiles) {
@@ -93,10 +120,8 @@ public class UserDataManager {
 
     // Inner class for loading stock photos
     public static class StockPhotoLoader {
-        private static final String STOCK_PHOTO_DIR = "src/photos/data/stock";
-
         public static void loadStockPhotos(Album stockAlbum) {
-            File stockDir = new File(STOCK_PHOTO_DIR);
+            File stockDir = getStockPhotoDirectory();
             File[] stockPhotos = stockDir.listFiles();
             if (stockPhotos != null) {
                 for (File photoFile : stockPhotos) {
@@ -115,8 +140,7 @@ public class UserDataManager {
     }
 
     public static void deleteUserData(String username) throws IOException {
-        String filename = DATA_FOLDER + File.separator + username + FILE_EXTENSION;
-        File userFile = new File(filename);
+        File userFile = new File(getDataFolder(), username + FILE_EXTENSION);
         if (userFile.exists()) {
             if (!userFile.delete()) {
                 throw new IOException("Failed to delete user data for " + username);
@@ -128,7 +152,7 @@ public class UserDataManager {
     
     public static List<String> loadAllUsernames() throws IOException, ClassNotFoundException {
         List<String> usernames = new ArrayList<>();
-        File dataDir = new File(DATA_FOLDER);
+        File dataDir = getDataFolder();
         File[] userFiles = dataDir.listFiles((dir, name) -> name.endsWith(FILE_EXTENSION));
     
         if (userFiles != null) {
